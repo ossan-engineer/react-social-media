@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Post from './Post';
+
 type Props = {
   posts: Post[];
 };
@@ -14,17 +16,7 @@ const PostList: React.FC<Props> = ({ posts }) => {
   return (
     <>
       {posts.map(({ content, image, user }: Post, index: number) => (
-        <React.Fragment key={index}>
-          {image && (
-            <img
-              style={{ height: 100, width: 200, objectFit: 'contain' }}
-              src={URL.createObjectURL(image)}
-              alt="Post Contain"
-            />
-          )}
-          <p>{content}</p>
-          <div>{user}</div>
-        </React.Fragment>
+        <Post content={content} image={image} user={user} key={index} />
       ))}
     </>
   );
