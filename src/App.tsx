@@ -20,8 +20,7 @@ const App = () => {
   }, [user]);
 
   const handleAddPost = (post: Post) => {
-    const newPosts = [post, ...posts];
-    setPosts(newPosts);
+    setPosts(prevPosts => [post, ...prevPosts]);
   };
 
   if (!user) {
