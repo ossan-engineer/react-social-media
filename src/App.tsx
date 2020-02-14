@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import Login from './components/Login';
+import Header from './components/Header';
 
 const App = () => {
   const [user, setUser] = useState('');
@@ -8,7 +9,11 @@ const App = () => {
   if (!user) {
     return <Login setUser={setUser} />;
   }
-  return <div>APP</div>;
+  return (
+    <>
+      <Header user={user} setUser={setUser} />
+    </>
+  );
 };
 
 export default App;
