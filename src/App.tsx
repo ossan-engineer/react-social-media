@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Login from './components/Login';
 import Header from './components/Header';
 import CreatePost from './components/CreatePost';
+import PostList from './components/PostList';
 
 type Post = {
   content: string;
@@ -25,19 +26,7 @@ const App = () => {
     <>
       <Header user={user} setUser={setUser} />
       <CreatePost user={user} setPosts={setPosts} posts={posts} />
-      {posts.map(({ content, image, user }: Post, index: number) => (
-        <React.Fragment key={index}>
-          {image && (
-            <img
-              style={{ height: 100, width: 200, objectFit: 'contain' }}
-              src={URL.createObjectURL(image)}
-              alt="Post Contain"
-            />
-          )}
-          <p>{content}</p>
-          <div>{user}</div>
-        </React.Fragment>
-      ))}
+      <PostList posts={posts} />
     </>
   );
 };
