@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 type Props = {
   user: string;
@@ -9,12 +9,15 @@ type Props = {
 const CreatePost: React.FC<Props> = ({ user, setPosts, posts }) => {
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
+  const imageInputRef = useRef<FIXME_any>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const post = { content, image, user };
     const newPosts = [post, ...posts];
     setPosts(newPosts);
+    setContent('');
+    imageInputRef.current.value = '';
   };
 
   return (
@@ -27,10 +30,12 @@ const CreatePost: React.FC<Props> = ({ user, setPosts, posts }) => {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setContent(e.target.value)
           }
+          value={content}
         />
         <input
           type="file"
           onChange={(e: FIXME_any) => setImage(e.target.files[0])}
+          ref={imageInputRef}
         />
         <button type="submit">Submit Post</button>
       </form>
