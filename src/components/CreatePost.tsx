@@ -1,12 +1,17 @@
 import React, { useState, useRef } from 'react';
 
-type Props = {
+type Post = {
+  content: string;
+  image: FIXME_any;
   user: string;
-  setPosts: (posts: FIXME_any[]) => void;
-  posts: FIXME_any[];
 };
 
-const CreatePost: React.FC<Props> = ({ user, setPosts, posts }) => {
+type Props = {
+  user: string;
+  handleAddPost: (post: Post) => void;
+};
+
+const CreatePost: React.FC<Props> = ({ user, handleAddPost }) => {
   const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
   const imageInputRef = useRef<FIXME_any>(null);
@@ -14,8 +19,7 @@ const CreatePost: React.FC<Props> = ({ user, setPosts, posts }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const post = { content, image, user };
-    const newPosts = [post, ...posts];
-    setPosts(newPosts);
+    handleAddPost(post);
     setContent('');
     imageInputRef.current.value = '';
   };
